@@ -1,22 +1,16 @@
-import { EEntityAnimations } from '../constants';
-import { Animated, Attackable } from '../interfaces';
-import { TEnityAnimationsMeta } from '../interfaces/entityAnimationState.interfaces';
+import { Attackable } from '@shared/interfaces';
+import { Animator } from './animator.classes';
 
-export abstract class Entity implements Attackable, Animated {
+export abstract class Entity implements Attackable {
   private _healthPoints: number;
   private _damage: number;
+  private _animator: Animator;
 
-  animationsMeta: TEnityAnimationsMeta;
-  currentAnimation: EEntityAnimations = EEntityAnimations.IDLE;
-
-  constructor(healthPoints: number, damage: number, animationsMeta: TEnityAnimationsMeta) {
+  constructor(healthPoints: number, damage: number, animator: Animator) {
     this._healthPoints = healthPoints;
     this._damage = damage;
-    this.animationsMeta = animationsMeta;
-  }
-
-  changeAnimaton(newAnimation: EEntityAnimations) {
-    this.currentAnimation = newAnimation;
+    this._animator = animator;
+    this._animator.bindAnimatedEntity(this)
   }
 
   get healthPoints() {
@@ -47,5 +41,9 @@ export abstract class Entity implements Attackable, Animated {
 
   attack(entity: Entity) {
     entity.getDamage(this.damage);
+  }
+
+  get animator(){
+    return this._animator
   }
 }

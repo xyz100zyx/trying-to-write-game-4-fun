@@ -1,5 +1,5 @@
 import { EEntityAnimations } from '../constants';
-import { TEnityAnimationsMeta } from './entityAnimationState.interfaces';
+import { TEnityAnimationsMeta } from './entityAnimationMeta.interfaces';
 
 export interface Animated {
   animationsMeta: TEnityAnimationsMeta;
