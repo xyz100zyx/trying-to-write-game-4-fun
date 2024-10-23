@@ -1,11 +1,11 @@
 import './App.css';
+import { Canvas } from './shared';
 
 function App() {
   return (
-    <>
-      <div></div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    <div style={{ width: '100%', height: '100%' }}>
+      <Canvas />
+    </div>
   );
 }
 

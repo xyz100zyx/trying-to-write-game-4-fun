@@ -20,6 +20,7 @@ export default tseslint.config(
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
+  { ...eslintReact.configs.flat.recommended, settings: { react: { version: 'detect' } } },
   {
     languageOptions: {
       parser,
@@ -28,23 +29,28 @@ export default tseslint.config(
         ...globals.browser,
         ...globals.es2022,
       },
-      parserOptions: {
-        ...eslintReact.configs.flat.recommended.languageOptions.parserOptions,
-        project: ['tsconfig.json', 'tsconfig.node.json', 'tsconfig.app.json'],
-      },
     },
   },
   {
     rules: {
-      'no-unused-vars': 'error',
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        {
+          vars: 'all',
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+        },
+      ],
       'no-undef': 'error',
       semi: 'error',
       'prefer-const': 'error',
-      ...eslintConfigPrettier.rules,
+      'react/react-in-jsx-scope': 'off',
     },
   },
   { files: ['**/*.{js,jsx,ts,tsx}'] },
   {
     ignores: ['node_modules', 'dist'],
   },
+  eslintConfigPrettier,
 );
