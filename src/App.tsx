@@ -1,10 +1,10 @@
 import './App.css';
-import { Canvas } from './shared';
+import { GameProcessView } from '@/features';
 
 function App() {
   return (
     <div style={{ width: '100%', height: '100%' }}>
-      <Canvas />
+      <GameProcessView />
     </div>
   );
 }
